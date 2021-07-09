@@ -5,14 +5,14 @@ using UnityEngine;
 public class IsometricPlayerMovementController : MonoBehaviour
 {
     public float movementSpeed = 1f;
-    IsometricCharacterRenderer isoRenderer;
+    // IsometricCharacterRenderer isoRenderer;
 
     Rigidbody2D rbody;
 
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
-        isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
+        // isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
     }
 
     void FixedUpdate()
