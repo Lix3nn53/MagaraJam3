@@ -12,7 +12,7 @@ public class Gamer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        destination = new Vector2(arcade.position.x, arcade.position.y);
+        destination = new Vector2(arcade.position.x + 0.5f, arcade.position.y - 0.5f);
     }
 
     // Update is called once per frame
