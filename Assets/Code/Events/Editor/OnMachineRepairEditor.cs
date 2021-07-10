@@ -1,8 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(OnEnemyDamagePlayer))]
-public class OnEnemyDamagePlayerEditor : Editor
+[CustomEditor(typeof(OnMachineRepair))]
+public class OnMachineRepairEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -10,11 +10,11 @@ public class OnEnemyDamagePlayerEditor : Editor
 
         GUI.enabled = Application.isPlaying;
 
-        OnEnemyDamagePlayer delegateEvent = target as OnEnemyDamagePlayer;
+        OnMachineRepair delegateEvent = target as OnMachineRepair;
 
         if (GUILayout.Button("Raise"))
         {
-            delegateEvent.Delegate(1);
+            delegateEvent.Delegate();
         }
     }
 }

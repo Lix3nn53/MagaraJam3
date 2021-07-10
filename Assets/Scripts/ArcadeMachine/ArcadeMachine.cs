@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+ using UnityEngine.Experimental.Rendering.Universal;
 
 public class ArcadeMachine : MonoBehaviour
 {
-    public bool isEmpty = true;
     public List<Transform> steps;
+    private Color startEmissionColor;
+
+    private bool isEmpty = true;
+    private bool isWorking = true;
+    private Renderer rendererArcade;
+    private Light2D light2D;
 
     // Start is called before the first frame update
     void Start()
     {
        GameManager.Instance.arcadeMachines.Add(this);
+
+       rendererArcade = GetComponentInChildren<Renderer>();
+       startEmissionColor = rendererArcade.material.GetColor("_EmissionColor");
+       light2D = GetComponentInChildren<Light2D>();
     }
 
     public Vector2 getDestination(int step) {
@@ -24,5 +34,20 @@ public class ArcadeMachine : MonoBehaviour
 
     public int getStepCount() {
         return steps.Count;
+    }
+
+    public bool isAvailable() {
+        return isEmpty && isWorking;
+    }
+
+    public void setWorking(bool working) {
+        isWorking = working;
+        if (working) {
+            light2D.intensity = 0.4f;
+            rendererArcade.material.SetColor("_EmissionColor", startEmissionColor);
+        } else {
+            light2D.intensity = 0f;
+            rendererArcade.material.SetColor("_EmissionColor", new Color());
+        }
     }
 }

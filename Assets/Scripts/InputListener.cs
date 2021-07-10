@@ -1,14 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputListener : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
+    private IsometricPlayerMovementController controller;
 
-    
+    private void Awake() {
+        controller = GetComponent<IsometricPlayerMovementController>();
+    }
+
+    public void OnInterract(InputAction.CallbackContext context)
+    {
+        if (context.performed) {
+            Debug.Log("Interract!");
+        }
+    }
+
+    public void OnMovement(InputAction.CallbackContext context)
+    {
+        if (context.performed) {
+            Vector2 movement = context.ReadValue<Vector2>();
+            controller.OnMovement(movement);
+        } else if (context.canceled) {
+            controller.OnMovementCancel();
+        }
     }
 }

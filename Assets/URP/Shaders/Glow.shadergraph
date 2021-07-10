@@ -1412,7 +1412,7 @@
     },
     "m_Name": "EmissionColor",
     "m_DefaultReferenceName": "Color_e6ac6abb6a0f4477a8bb723bf6f421ba",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_EmissionColor",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,

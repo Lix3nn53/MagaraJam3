@@ -9,6 +9,9 @@ public class IsometricPlayerMovementController : MonoBehaviour
 
     Rigidbody2D rbody;
 
+    private bool isMoving = false;
+    private Vector2 movementInput;
+
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
@@ -17,15 +20,23 @@ public class IsometricPlayerMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!isMoving) return;
+
         Vector2 currentPos = rbody.position;
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector2 inputVector = new Vector2(horizontalInput, verticalInput);
-        inputVector = Vector2.ClampMagnitude(inputVector, 1);
-        Vector2 movement = inputVector * movementSpeed;
+        Vector2 clamp = Vector2.ClampMagnitude(movementInput, 1);
+        Vector2 movement = clamp * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         // isoRenderer.SetDirection(movement);
         rbody.MovePosition(newPos);
         transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
+    }
+
+    public void OnMovement(Vector2 movement) {
+        movementInput = movement;
+        isMoving = true;
+    }
+
+    public void OnMovementCancel() {
+        isMoving = false;
     }
 }

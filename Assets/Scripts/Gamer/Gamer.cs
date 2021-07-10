@@ -13,7 +13,7 @@ public class Gamer : MonoBehaviour
     void Start()
     {
         foreach (ArcadeMachine arcade in GameManager.Instance.arcadeMachines) {
-            if (arcade.isEmpty) {
+            if (arcade.isAvailable()) {
                 targetMachine = arcade;
             }
         }
@@ -22,6 +22,7 @@ public class Gamer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (targetMachine == null) return;
         if (currentStep > targetMachine.getStepCount()) return;
 
         Vector2 destination = targetMachine.getDestination(currentStep);
