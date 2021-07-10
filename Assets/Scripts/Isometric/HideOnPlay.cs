@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HideOnPlay : MonoBehaviour
 {
-    void Awake()
+    void Start()
     {
         if (!GlobalSettings.Instance.hideOnPlay) return;
 
