@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: test_half
+  m_Name: TAILS_SET_HU_12
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 3a4bdcd4760523346bbd361d162e7b9a, type: 3}
+  m_Sprite: {fileID: 7620685565909395126, guid: 69b6b8a93b4423440a7c04b11bb8c613, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -33,4 +33,4 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 2
+  m_ColliderType: 1
