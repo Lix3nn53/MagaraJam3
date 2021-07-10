@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class Gamer : MonoBehaviour
 {
-    public Transform arcade;
     public float speed = 1f;
     public float stopDistance = 0.1f;
-    private Vector2 destination;
+    private ArcadeMachine targetMachine;
+    private int currentStep = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        destination = new Vector2(arcade.position.x + 0.5f, arcade.position.y - 0.5f);
+        foreach (ArcadeMachine arcade in GameManager.Instance.arcadeMachines) {
+            if (arcade.isEmpty) {
+                targetMachine = arcade;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (currentStep > targetMachine.getStepCount()) return;
+
+        Vector2 destination = targetMachine.getDestination(currentStep);
+
         float distance = Vector2.Distance(transform.position, destination);
 
-        if (distance < stopDistance) return; 
+        if (distance < stopDistance) {
+            currentStep++;
+            return;
+        }
 
         float step = speed * Time.deltaTime;
 
