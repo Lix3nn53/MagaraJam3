@@ -52,6 +52,9 @@ public class ArcadeMachine : MonoBehaviour
     public void OnGamerTarget() {
         isEmpty = false;
     }
+    public void OnGamerStopPlaying() {
+        isEmpty = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
         var go = other.gameObject;

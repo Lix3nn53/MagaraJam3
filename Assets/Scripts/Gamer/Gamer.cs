@@ -67,7 +67,6 @@ public class Gamer : MonoBehaviour
             transform.position = new Vector3(move.x, move.y, transform.position.z);
         } else if (stage == GamerScenarioStage.Exit) {
             if (currentStep == -2) {
-                Debug.Log("DESTROYYYYYYY");
                 Destroy(gameObject);
                 return;
             }
@@ -114,5 +113,6 @@ public class Gamer : MonoBehaviour
 
         currentStep--;
         stage = GamerScenarioStage.Exit;
+        targetMachine.OnGamerStopPlaying();
     }
 }
