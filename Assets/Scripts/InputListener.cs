@@ -14,7 +14,7 @@ public class InputListener : MonoBehaviour
     public void OnInterract(InputAction.CallbackContext context)
     {
         if (context.performed) {
-            Debug.Log("Interract!");
+            Player.Instance.Interract();
         }
     }
 

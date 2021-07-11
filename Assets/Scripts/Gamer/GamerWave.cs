@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class GamerWave : MonoBehaviour
 {
+    public static GamerWave Instance;
     public int gamerPerSpawn = 1;
     public int cooldown = 5;
     private GamerSpawner[] spawners;
     private int nextSpawner = 0;
     private int spawnCountDown = 0;
 
+    void Awake() {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         spawners = GetComponentsInChildren<GamerSpawner>();
 
-         InvokeRepeating("RunEverySecond", 1, 1);
+        InvokeRepeating("RunEverySecond", 1, 1);
     }
 
     private void RunEverySecond()
@@ -43,5 +55,11 @@ public class GamerWave : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public Transform GetRandomExitPoint() {
+        int random = Random.Range(0, spawners.Length);
+
+        return spawners[random].transform;
     }
 }

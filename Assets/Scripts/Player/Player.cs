@@ -5,19 +5,29 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    public GameObject keyGuide;
-    private TMP_Text keyGuideText;
+    public static Player Instance;
 
-    private void Start() {
-        keyGuideText = keyGuide.GetComponentInChildren<TMP_Text>();
+    private Interractable selectedInterractable;
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Instance = this;
+        }
     }
-    public void KeyGuideChange(string text) {
-        keyGuideText.text = text;
+
+    public void SetSelectedInterractable(Interractable interractable) {
+        selectedInterractable = interractable;
     }
-    public void KeyGuideEnable() {
-        keyGuide.SetActive(true);
-    }
-    public void KeyGuideDisable() {
-        keyGuide.SetActive(false);
+
+    public void Interract() {
+        if (selectedInterractable != null) {
+            selectedInterractable.OnInterract();
+        }
     }
 }
