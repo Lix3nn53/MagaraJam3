@@ -8,8 +8,8 @@ public class ArcadeMachine : MonoBehaviour
     public Transform[] steps;
     private Color startEmissionColor;
 
-    private bool isEmpty = true;
-    private bool isWorking = true;
+    public bool isEmpty = true;
+    public bool isWorking = true;
     private Renderer rendererArcade;
     private Light2D light2D;
 

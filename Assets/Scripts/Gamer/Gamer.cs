@@ -14,6 +14,7 @@ public class Gamer : MonoBehaviour
 
     private GamerScenarioStage stage = GamerScenarioStage.Enter;
     private Transform exitPoint;
+    private bool happy = true;
     enum GamerScenarioStage 
     {
         Enter,
@@ -68,11 +69,9 @@ public class Gamer : MonoBehaviour
             transform.position = new Vector3(move.x, move.y, transform.position.z);
         } else if (stage == GamerScenarioStage.Exit) {
             if (currentStep == -2) {
-                Destroy(gameObject);
+                OnExitDoor();
                 return;
             }
-            
-            Debug.Log(currentStep);
 
             Vector2 destination;
 
@@ -110,10 +109,26 @@ public class Gamer : MonoBehaviour
 
     IEnumerator PlayerPlayOnMachineCoroutine(int playTime)
     {
-        yield return new WaitForSeconds(playTime);
+        for (int i = 0; i < playTime; i++) {
+            if (!targetMachine.isWorking) {
+                this.happy = false;
+                break;
+            }
+
+            yield return new WaitForSeconds(1);
+        }
 
         currentStep--;
         stage = GamerScenarioStage.Exit;
         targetMachine.OnGamerStopPlaying();
+    }
+
+    private void OnExitDoor() {
+        if (happy) {
+            GameManager.Instance.score.ApplyChange(10);
+        } else {
+            GameManager.Instance.customerSatisfaction.ApplyChange(-1);
+        }
+        Destroy(gameObject);
     }
 }
