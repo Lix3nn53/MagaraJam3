@@ -23,7 +23,7 @@ public class ArcadeMachine : MonoBehaviour
 
     public Vector2 getDestination(int step) {
         if (steps.Length == step) {
-            return new Vector2(transform.position.x + 0.5f, transform.position.y - 0.5f);        
+            return new Vector2(transform.position.x + 0.1f, transform.position.y - 0.1f);        
         } else {
             Transform stepTransform = steps[step].transform;
             return new Vector2(stepTransform.position.x, stepTransform.position.y);

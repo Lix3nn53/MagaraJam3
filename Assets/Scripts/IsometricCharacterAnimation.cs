@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class IsometricCharacterAnimation : MonoBehaviour
 {
-    public static readonly string[] staticDirections = { "Static NW", "Static SW", "Static SE", "Static NE" };
-    public static readonly string[] runDirections = {"Run NW", "Run SW", "Run SE", "Run NE"};
-
     Animator animator;
     SpriteRenderer characterRenderer;
 
