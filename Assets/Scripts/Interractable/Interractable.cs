@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Interractable : MonoBehaviour
 {
+    public GameObject keyGuide;
     public virtual void OnTriggerEnter2D(Collider2D other) {
         var go = other.gameObject;
         if (go == null || !other.gameObject.CompareTag("Player"))
@@ -11,8 +12,9 @@ public class Interractable : MonoBehaviour
 
         Player player = go.GetComponent<Player>();
         
-        player.KeyGuideChange("E");
-        player.KeyGuideEnable();
+        if (keyGuide != null) {
+            keyGuide.SetActive(true);
+        }
 
         player.SetSelectedInterractable(this);
     }
@@ -24,10 +26,12 @@ public class Interractable : MonoBehaviour
 
         Player player = go.GetComponent<Player>();
         
-        player.KeyGuideDisable();
+        if (keyGuide != null) {
+            keyGuide.SetActive(false);
+        }
     }
 
     public virtual void OnInterract() {
-        
+
     }
 }
