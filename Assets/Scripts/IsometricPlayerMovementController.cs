@@ -5,7 +5,7 @@ using UnityEngine;
 public class IsometricPlayerMovementController : MonoBehaviour
 {
     public float movementSpeed = 1f;
-    // IsometricCharacterRenderer isoRenderer;
+    IsometricCharacterAnimation isoAnimation;
 
     Rigidbody2D rbody;
 
@@ -15,18 +15,23 @@ public class IsometricPlayerMovementController : MonoBehaviour
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
-        // isoRenderer = GetComponentInChildren<IsometricCharacterRenderer>();
+        isoAnimation = GetComponentInChildren<IsometricCharacterAnimation>();
     }
 
     void FixedUpdate()
     {
-        if (!isMoving) return;
+        if (!isMoving) {
+            isoAnimation.SetDirection(new Vector2());
+            return;
+        }
 
         Vector2 currentPos = rbody.position;
         Vector2 clamp = Vector2.ClampMagnitude(movementInput, 1);
         Vector2 movement = clamp * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
-        // isoRenderer.SetDirection(movement);
+        
+        isoAnimation.SetDirection(movement);
+        
         rbody.MovePosition(newPos);
         transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
     }
