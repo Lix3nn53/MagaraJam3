@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
  using UnityEngine.Experimental.Rendering.Universal;
 
-public class ArcadeMachine : MonoBehaviour
+public class ArcadeMachine : Interractable
 {
     public Transform[] steps;
     private Color startEmissionColor;
@@ -62,6 +62,12 @@ public class ArcadeMachine : MonoBehaviour
     {
         bool tickOne = true;
         for (;;) {
+            float errorChance = Random.Range(0.0f, 1.0f);
+
+            if (errorChance < 0.1f) {
+                setWorking(false);
+            }
+
             if (!isWorking || isEmpty) {
                 break;
             }
@@ -88,24 +94,7 @@ public class ArcadeMachine : MonoBehaviour
             rendererArcade.material.SetColor("_EmissionColor", new Color());
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        var go = other.gameObject;
-        if (go == null || !other.gameObject.CompareTag("Player"))
-            return;
-
-        Player player = go.GetComponent<Player>();
-        
-        player.KeyGuideChange("E");
-        player.KeyGuideEnable();
-    }
-    private void OnTriggerExit2D(Collider2D other) {
-        var go = other.gameObject;
-        if (go == null || !other.gameObject.CompareTag("Player"))
-            return;
-
-        Player player = go.GetComponent<Player>();
-        
-        player.KeyGuideDisable();
+    public override void OnInterract() {
+        Debug.Log("INTERRACT MACHINAAA");
     }
 }
