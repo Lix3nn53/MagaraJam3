@@ -109,13 +109,13 @@ public class Gamer : MonoBehaviour
 
     IEnumerator PlayerPlayOnMachineCoroutine(int playTime)
     {
-        for (int i = 0; i < playTime; i++) {
+        for (int i = 0; i < playTime * 2; i++) {
             if (!targetMachine.isWorking) {
                 this.happy = false;
                 break;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
 
         currentStep--;

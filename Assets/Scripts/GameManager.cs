@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int s) {
         score.ApplyChange(s);
-        scoreText.text = "Money: " + score.value;
+        scoreText.text = "" + score.value;
     }
 
     public void AddCustomerSatisfaction(int add) {
