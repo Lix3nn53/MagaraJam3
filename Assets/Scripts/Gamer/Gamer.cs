@@ -12,6 +12,16 @@ public class Gamer : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color32[] colors = new Color32[] { new Color32(0, 12, 24, 0), new Color32(120, 0, 0, 0), new Color32(0, 24, 0, 0) };
 
+    private GamerScenarioStage stage = GamerScenarioStage.Enter;
+    private Transform exitPoint;
+    enum GamerScenarioStage 
+    {
+        Enter,
+        Playing,
+        Exit
+    }
+
+
     private void Awake()
     {
         isoAnimation = GetComponentInChildren<IsometricCharacterAnimation>();
@@ -26,35 +36,83 @@ public class Gamer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (targetMachine == null) {
-            isoAnimation.SetDirection(new Vector2());
-            return;
+        if (stage == GamerScenarioStage.Enter) {
+            if (targetMachine == null) {
+                isoAnimation.SetDirection(new Vector2());
+                return;
+            }
+            if (currentStep > targetMachine.getStepCount()) {
+                isoAnimation.SetDirection(new Vector2());
+                stage = GamerScenarioStage.Playing;
+                
+                StartCoroutine(PlayerPlayOnMachineCoroutine(5));
+                return;
+            }
+
+            Vector2 destination = targetMachine.getDestination(currentStep);
+
+            float distance = Vector2.Distance(transform.position, destination);
+
+            if (distance < stopDistance) {
+                currentStep++;
+                return;
+            }
+
+            float step = speed * Time.deltaTime;
+
+            // move sprite towards the target location
+            Vector2 move = Vector2.MoveTowards(transform.position, destination, step);
+
+            isoAnimation.SetDirection(move - new Vector2(transform.position.x, transform.position.y));
+            transform.position = new Vector3(move.x, move.y, transform.position.z);
+        } else if (stage == GamerScenarioStage.Exit) {
+            if (currentStep == -2) {
+                Debug.Log("DESTROYYYYYYY");
+                Destroy(gameObject);
+                return;
+            }
+            
+            Debug.Log(currentStep);
+
+            Vector2 destination;
+
+            if (currentStep == -1) {
+                if (exitPoint == null) {
+                    exitPoint = GamerWave.Instance.GetRandomExitPoint();
+                }
+
+                destination = new Vector2(exitPoint.position.x, exitPoint.position.y);
+            } else {
+                destination = targetMachine.getDestination(currentStep);
+            }
+
+            float distance = Vector2.Distance(transform.position, destination);
+
+            if (distance < stopDistance) {
+                currentStep--;
+                return;
+            }
+
+            float step = speed * Time.deltaTime;
+
+            // move sprite towards the target location
+            Vector2 move = Vector2.MoveTowards(transform.position, destination, step);
+
+            isoAnimation.SetDirection(move - new Vector2(transform.position.x, transform.position.y));
+            transform.position = new Vector3(move.x, move.y, transform.position.z);
         }
-        if (currentStep > targetMachine.getStepCount()) {
-            isoAnimation.SetDirection(new Vector2());
-            return;
-        }
-
-        Vector2 destination = targetMachine.getDestination(currentStep);
-
-        float distance = Vector2.Distance(transform.position, destination);
-
-        if (distance < stopDistance) {
-            currentStep++;
-            return;
-        }
-
-        float step = speed * Time.deltaTime;
-
-        // move sprite towards the target location
-        Vector2 move = Vector2.MoveTowards(transform.position, destination, step);
-
-        isoAnimation.SetDirection(move - new Vector2(transform.position.x, transform.position.y));
-        transform.position = new Vector3(move.x, move.y, transform.position.z);
     }
 
     public void SetTargetMachine(ArcadeMachine arcadeMachine) {
         targetMachine = arcadeMachine;
         targetMachine.OnGamerTarget();
+    }
+
+    IEnumerator PlayerPlayOnMachineCoroutine(int playTime)
+    {
+        yield return new WaitForSeconds(playTime);
+
+        currentStep--;
+        stage = GamerScenarioStage.Exit;
     }
 }

@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     }
     public void KeyGuideEnable() {
         keyGuide.SetActive(true);
+        // RectTransform rectTransform keyGuide.transform.x = 1f;
     }
     public void KeyGuideDisable() {
         keyGuide.SetActive(false);
