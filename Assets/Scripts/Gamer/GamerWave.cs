@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class GamerWave : MonoBehaviour
 {
+    public int gamerPerSpawn = 1;
+    public int cooldown = 5;
     private GamerSpawner[] spawners;
     private int nextSpawner = 0;
+    private int spawnCountDown = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         spawners = GetComponentsInChildren<GamerSpawner>();
+
+         InvokeRepeating("RunEverySecond", 1, 1);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void RunEverySecond()
     {
-        spawnGamer();
+        if (spawnCountDown > 0) {
+            spawnCountDown--;
+        } else {
+            for (int i = 0; i < gamerPerSpawn; i++) {
+                spawnGamer();
+            }
+            spawnCountDown = cooldown;
+        }
     }
 
     public void spawnGamer() {
