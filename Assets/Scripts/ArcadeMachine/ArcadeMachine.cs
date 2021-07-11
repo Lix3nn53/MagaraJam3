@@ -95,6 +95,6 @@ public class ArcadeMachine : Interractable
         }
     }
     public override void OnInterract() {
-        Debug.Log("INTERRACT MACHINAAA");
+        setWorking(true);
     }
 }

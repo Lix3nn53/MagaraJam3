@@ -125,9 +125,10 @@ public class Gamer : MonoBehaviour
 
     private void OnExitDoor() {
         if (happy) {
-            GameManager.Instance.score.ApplyChange(10);
+            GameManager.Instance.AddScore(10);
+            GameManager.Instance.AddCustomerSatisfaction(+1);
         } else {
-            GameManager.Instance.customerSatisfaction.ApplyChange(-1);
+            GameManager.Instance.AddCustomerSatisfaction(-2);
         }
         Destroy(gameObject);
     }
