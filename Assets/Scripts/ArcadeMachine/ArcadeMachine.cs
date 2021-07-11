@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ArcadeMachine : MonoBehaviour
 {
-    public List<Transform> steps;
+    public Transform[] steps;
     private Color startEmissionColor;
 
     private bool isEmpty = true;
@@ -16,15 +16,13 @@ public class ArcadeMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       GameManager.Instance.arcadeMachines.Add(this);
-
        rendererArcade = GetComponentInChildren<Renderer>();
        startEmissionColor = rendererArcade.material.GetColor("_EmissionColor");
        light2D = GetComponentInChildren<Light2D>();
     }
 
     public Vector2 getDestination(int step) {
-        if (steps.Count == step) {
+        if (steps.Length == step) {
             return new Vector2(transform.position.x + 0.5f, transform.position.y - 0.5f);        
         } else {
             Transform stepTransform = steps[step].transform;
@@ -33,7 +31,7 @@ public class ArcadeMachine : MonoBehaviour
     }
 
     public int getStepCount() {
-        return steps.Count;
+        return steps.Length;
     }
 
     public bool isAvailable() {
@@ -49,5 +47,9 @@ public class ArcadeMachine : MonoBehaviour
             light2D.intensity = 0f;
             rendererArcade.material.SetColor("_EmissionColor", new Color());
         }
+    }
+
+    public void OnGamerTarget() {
+        isEmpty = false;
     }
 }

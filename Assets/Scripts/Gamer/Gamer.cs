@@ -12,11 +12,8 @@ public class Gamer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (ArcadeMachine arcade in GameManager.Instance.arcadeMachines) {
-            if (arcade.isAvailable()) {
-                targetMachine = arcade;
-            }
-        }
+        targetMachine = ArcadeMachineManager.Instance.GetAvailable();
+        targetMachine.OnGamerTarget();
     }
 
     // Update is called once per frame
