@@ -35,6 +35,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "03ce4a2a-9a0c-48b2-b7bf-819d66856c33",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "56e8252f-2e92-40c0-a16d-096f0d6edfa1",
                     "path": "2DVector",
