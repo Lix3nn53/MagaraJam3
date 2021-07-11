@@ -6,7 +6,10 @@ public class GamerSpawner : MonoBehaviour
 {
     public GameObject gamerPrefab;
 
-    public void spawnGamer() {
-        Instantiate(gamerPrefab, transform.position, Quaternion.identity);
+    public void spawnGamer(ArcadeMachine arcadeMachine) {
+        GameObject go = Instantiate(gamerPrefab, transform.position, Quaternion.identity);
+
+        Gamer gamer = go.GetComponent<Gamer>();
+        gamer.SetTargetMachine(arcadeMachine);
     }
 }
