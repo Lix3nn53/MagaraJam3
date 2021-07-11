@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IsometricPlayerMovementController : MonoBehaviour
 {
-    public float movementSpeed = 1f;
+    public FloatVariable movementSpeed;
     IsometricCharacterAnimation isoAnimation;
 
     Rigidbody2D rbody;
@@ -27,7 +27,7 @@ public class IsometricPlayerMovementController : MonoBehaviour
 
         Vector2 currentPos = rbody.position;
         Vector2 clamp = Vector2.ClampMagnitude(movementInput, 1);
-        Vector2 movement = clamp * movementSpeed;
+        Vector2 movement = clamp * movementSpeed.value;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         
         isoAnimation.SetDirection(movement);

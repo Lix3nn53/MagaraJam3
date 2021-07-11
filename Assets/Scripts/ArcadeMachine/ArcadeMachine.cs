@@ -40,7 +40,7 @@ public class ArcadeMachine : MonoBehaviour
 
     public void setWorking(bool working) {
         isWorking = working;
-        if (working) {
+        if (isWorking) {
             light2D.intensity = 0.4f;
             rendererArcade.material.SetColor("_EmissionColor", startEmissionColor);
         } else {
@@ -52,8 +52,41 @@ public class ArcadeMachine : MonoBehaviour
     public void OnGamerTarget() {
         isEmpty = false;
     }
+
+    public void OnGamerStartPlaying() {
+        StartCoroutine(GamerPlayingEffectCoroutine());
+    }
+
+    // Play effect while player is playing on this machine
+    IEnumerator GamerPlayingEffectCoroutine()
+    {
+        bool tickOne = true;
+        for (;;) {
+            if (!isWorking || isEmpty) {
+                break;
+            }
+
+            if (tickOne) {
+                light2D.intensity = 0.4f;
+            } else {
+                light2D.intensity = 0f;
+            }
+
+            tickOne = !tickOne;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
     public void OnGamerStopPlaying() {
         isEmpty = true;
+        if (isWorking) {
+            light2D.intensity = 0.4f;
+            rendererArcade.material.SetColor("_EmissionColor", startEmissionColor);
+        } else {
+            light2D.intensity = 0f;
+            rendererArcade.material.SetColor("_EmissionColor", new Color());
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

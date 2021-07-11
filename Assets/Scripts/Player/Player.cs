@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     private void Start() {
         keyGuideText = keyGuide.GetComponentInChildren<TMP_Text>();
+        keyGuide.SetActive(false);
     }
     public void KeyGuideChange(string text) {
         keyGuideText.text = text;

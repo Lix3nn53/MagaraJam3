@@ -44,6 +44,7 @@ public class Gamer : MonoBehaviour
             if (currentStep > targetMachine.getStepCount()) {
                 isoAnimation.SetDirection(new Vector2());
                 stage = GamerScenarioStage.Playing;
+                targetMachine.OnGamerStartPlaying();
                 
                 StartCoroutine(PlayerPlayOnMachineCoroutine(5));
                 return;
