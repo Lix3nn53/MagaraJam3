@@ -23,7 +23,7 @@ public class ArcadeMachine : MonoBehaviour
 
     public Vector2 getDestination(int step) {
         if (steps.Length == step) {
-            return new Vector2(transform.position.x + 0.1f, transform.position.y - 0.1f);        
+            return new Vector2(transform.position.x + 0.6f, transform.position.y - 0.1f);        
         } else {
             Transform stepTransform = steps[step].transform;
             return new Vector2(stepTransform.position.x, stepTransform.position.y);
@@ -52,7 +52,7 @@ public class ArcadeMachine : MonoBehaviour
     public void OnGamerTarget() {
         isEmpty = false;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other) {
         var go = other.gameObject;
         if (go == null || !other.gameObject.CompareTag("Player"))

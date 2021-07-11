@@ -17,7 +17,11 @@ public class IsometricCharacterAnimation : MonoBehaviour
     {
         float magnitude = movementVector.magnitude;
         
-        animator.SetFloat("Speed", magnitude);
+        if (magnitude > 0.0f) {
+            animator.SetBool("Walking", true);
+        } else {
+            animator.SetBool("Walking", false);
+        }
 
         if (movementVector.y > 0) {
             animator.SetBool("FaceFront", false);
