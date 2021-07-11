@@ -28,9 +28,9 @@ public class IsometricCharacterAnimation : MonoBehaviour
             animator.SetBool("FaceFront", true);
         }
 
-        if (movementVector.x > 1) {
+        if (movementVector.x > 0) {
             characterRenderer.flipX = true;
-        } else if (movementVector.x < 1) {
+        } else if (movementVector.x < 0) {
             characterRenderer.flipX = false;
         }
     }
