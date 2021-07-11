@@ -24,21 +24,24 @@ public class GamerWave : MonoBehaviour
             spawnCountDown--;
         } else {
             for (int i = 0; i < gamerPerSpawn; i++) {
-                spawnGamer();
+                bool spawned = spawnGamer();
+                if (!spawned) break;
             }
             spawnCountDown = cooldown;
         }
     }
 
-    public void spawnGamer() {
+    public bool spawnGamer() {
         ArcadeMachine machine = ArcadeMachineManager.Instance.GetAvailable();
         if (machine != null) {
-            spawners[nextSpawner].spawnGamer();
+            spawners[nextSpawner].spawnGamer(machine);
 
             nextSpawner++;
             if(nextSpawner == spawners.Length) {
                 nextSpawner = 0;
             }
+            return true;
         }
+        return false;
     }
 }

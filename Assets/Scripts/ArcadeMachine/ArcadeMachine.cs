@@ -52,4 +52,24 @@ public class ArcadeMachine : MonoBehaviour
     public void OnGamerTarget() {
         isEmpty = false;
     }
+    
+    private void OnTriggerEnter2D(Collider2D other) {
+        var go = other.gameObject;
+        if (go == null || !other.gameObject.CompareTag("Player"))
+            return;
+
+        Player player = go.GetComponent<Player>();
+        
+        player.KeyGuideChange("E");
+        player.KeyGuideEnable();
+    }
+    private void OnTriggerExit2D(Collider2D other) {
+        var go = other.gameObject;
+        if (go == null || !other.gameObject.CompareTag("Player"))
+            return;
+
+        Player player = go.GetComponent<Player>();
+        
+        player.KeyGuideDisable();
+    }
 }

@@ -9,13 +9,6 @@ public class Gamer : MonoBehaviour
     private ArcadeMachine targetMachine;
     private int currentStep = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        targetMachine = ArcadeMachineManager.Instance.GetAvailable();
-        targetMachine.OnGamerTarget();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -37,5 +30,10 @@ public class Gamer : MonoBehaviour
         Vector2 move = Vector2.MoveTowards(transform.position, destination, step);
 
         transform.position = new Vector3(move.x, move.y, transform.position.z);
+    }
+
+    public void SetTargetMachine(ArcadeMachine arcadeMachine) {
+        targetMachine = arcadeMachine;
+        targetMachine.OnGamerTarget();
     }
 }
