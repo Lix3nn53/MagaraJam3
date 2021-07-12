@@ -10,8 +10,18 @@ public class ArcadeMachine : Interractable
 
     public bool isEmpty = true;
     public bool isWorking = true;
+    public float errorChance = 0.1f;
+    public GameObject faultElectricIcon;
+    public GameObject faultDiskIcon;
     private Renderer rendererArcade;
     private Light2D light2D;
+    private FaultType faultType = FaultType.Electric;
+
+    public enum FaultType 
+    {
+        Electric,
+        Disk,
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,15 +49,24 @@ public class ArcadeMachine : Interractable
     }
 
     // TODO add error type
-    public void setWorking(bool working) {
+    public void setWorking(bool working, FaultType faultType) {
         isWorking = working;
         if (isWorking) {
             light2D.intensity = 0.4f;
             rendererArcade.material.SetColor("_EmissionColor", startEmissionColor);
+                faultElectricIcon.SetActive(false);
+                faultDiskIcon.SetActive(false);
         } else {
             light2D.intensity = 0f;
             rendererArcade.material.SetColor("_EmissionColor", new Color());
             AudioManager.Instance.Play("MachineShowdownElectric");
+            this.faultType = faultType;
+
+            if (faultType == FaultType.Electric) {
+                faultElectricIcon.SetActive(true);
+            } else if (faultType == FaultType.Disk) {
+                faultDiskIcon.SetActive(true);
+            }
         }
     }
 
@@ -64,10 +83,15 @@ public class ArcadeMachine : Interractable
     {
         bool tickOne = true;
         for (;;) {
-            float errorChance = Random.Range(0.0f, 1.0f);
+            float errorRandom = Random.Range(0.0f, 1.0f);
 
-            if (errorChance < 0.1f) {
-                setWorking(false);
+            if (errorRandom < errorChance) {
+                int faultRandom = Random.Range(0, 2);
+                if (faultRandom == 0) {
+                    setWorking(false, FaultType.Electric);
+                } else {
+                    setWorking(false, FaultType.Disk);
+                }
             }
 
             if (!isWorking || isEmpty) {
@@ -97,7 +121,7 @@ public class ArcadeMachine : Interractable
         }
     }
     public override void OnInterract() {
-        setWorking(true);
+        setWorking(true, FaultType.Electric);
         AudioManager.Instance.Play("MachineStart");
     }
 }
