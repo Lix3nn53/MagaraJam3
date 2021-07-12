@@ -22,12 +22,12 @@ public class LightRotator : MonoBehaviour
     {
         if (increase) {
             transform.Rotate(new Vector3(0f, 0f, speed * Time.deltaTime));
-            if (transform.rotation.z >= max) {
+            if (transform.localEulerAngles.z >= max) {
                 increase = false;
             }
         } else {
             transform.Rotate(new Vector3(0f, 0f, -speed * Time.deltaTime));
-            if (transform.rotation.z <= min) {
+            if (transform.localEulerAngles.z <= min) {
                 increase = true;
             }
         }
