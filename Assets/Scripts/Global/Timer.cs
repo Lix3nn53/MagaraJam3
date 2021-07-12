@@ -9,6 +9,9 @@ public class Timer : MonoBehaviour
     public bool timerIsRunning = false;
     public TMP_Text timeText;
 
+    public GameObject endScreen;
+    public TMP_Text endScoreText;
+
     private void Start()
     {
         // Starts the timer automatically
@@ -29,6 +32,8 @@ public class Timer : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
                 Time.timeScale = 0f;
+                endScreen.SetActive(true);
+                endScoreText.text = "Score: " + GameManager.Instance.score.value;
             }
 
             DisplayTime(timeRemaining);
