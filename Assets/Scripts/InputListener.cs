@@ -27,4 +27,11 @@ public class InputListener : MonoBehaviour
             controller.OnMovementCancel();
         }
     }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed) {
+            PauseMenu.Instance.OnPauseKeyPress();
+        }
+    }
 }

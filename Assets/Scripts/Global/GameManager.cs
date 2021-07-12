@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text scoreText;
     public IntegerVariable customerSatisfaction;
     public Slider customerSatisfactionSlider;
+    public TMP_Text customerSatisfactionText;
 
     // Start is called before the first frame update
     void Awake()
@@ -27,10 +28,11 @@ public class GameManager : MonoBehaviour
     }
 
     void Start() {
-        customerSatisfaction.SetValue(GlobalSettings.Instance.maxCustomerSatisfaction);
+        customerSatisfaction.SetValue(GlobalSettings.Instance.startCustomerSatisfaction);
         score.SetValue(0);
+        scoreText.text = "" + score.value;
 
-        customerSatisfactionSlider.value = (float) GlobalSettings.Instance.maxCustomerSatisfaction / (float) customerSatisfaction.value;
+        customerSatisfactionSlider.value = (float) customerSatisfaction.value / (float) GlobalSettings.Instance.maxCustomerSatisfaction;
     }
 
     public void AddScore(int add) {
@@ -43,13 +45,15 @@ public class GameManager : MonoBehaviour
     public void AddCustomerSatisfaction(int add) {
         customerSatisfaction.ApplyChange(add);
 
-        if (customerSatisfaction.value < 0) {
-            customerSatisfaction.SetValue(0);
-            customerSatisfactionSlider.value = 0;
+        if (customerSatisfaction.value < 1) {
+            customerSatisfaction.SetValue(1);
+            customerSatisfactionSlider.value = 1;
             return;
         } else if (customerSatisfaction.value > GlobalSettings.Instance.maxCustomerSatisfaction) {
             customerSatisfaction.SetValue(GlobalSettings.Instance.maxCustomerSatisfaction);
         }
+
+        customerSatisfactionText.text = "" + customerSatisfaction.value;
 
         customerSatisfactionSlider.value = (float) customerSatisfaction.value / (float) GlobalSettings.Instance.maxCustomerSatisfaction;
     }

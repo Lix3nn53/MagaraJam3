@@ -7,7 +7,8 @@ public class GlobalSettings : MonoBehaviour
     public static GlobalSettings Instance;
     public bool hideOnPlay = true;
     public int heightPerLevel = 2;
-    public int maxCustomerSatisfaction = 10;
+    public int maxCustomerSatisfaction = 20;
+    public int startCustomerSatisfaction = 10;
 
     void Awake()
     {

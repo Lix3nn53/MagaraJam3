@@ -28,6 +28,7 @@ public class Timer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
+                Time.timeScale = 0f;
             }
 
             DisplayTime(timeRemaining);
