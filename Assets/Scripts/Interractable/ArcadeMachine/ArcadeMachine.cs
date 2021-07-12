@@ -122,6 +122,7 @@ public class ArcadeMachine : Interractable
     }
     public override void OnInterract() {
         if (!Player.Instance.HasTool()) return;
+        if (isWorking) return;
 
         if (Player.Instance.GetCurrentTool() == faultType) {
             setWorking(true, FaultType.Electric);
