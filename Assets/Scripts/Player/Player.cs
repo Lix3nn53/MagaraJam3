@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public Image toolElectricUI;
     public Image toolDiskUI;
     private ArcadeMachine.FaultType currentTool = ArcadeMachine.FaultType.Electric;
+    private bool hasTool = false;
 
     private Interractable selectedInterractable;
     void Awake()
@@ -35,6 +36,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetHasTool(bool has) {
+        hasTool = has;
+        if (!hasTool) {
+            toolElectricUI.gameObject.SetActive(false);
+            toolDiskUI.gameObject.SetActive(false);
+        }
+    }
+
+    public bool HasTool() {
+        return hasTool;
+    }
+
     public void SetCurrentTool(ArcadeMachine.FaultType tool) {
         currentTool = tool;
         if (currentTool == ArcadeMachine.FaultType.Electric) {
@@ -44,6 +57,8 @@ public class Player : MonoBehaviour
             toolElectricUI.gameObject.SetActive(false);
             toolDiskUI.gameObject.SetActive(true);
         }
+
+        hasTool = true;
     }
 
     public ArcadeMachine.FaultType GetCurrentTool() {
