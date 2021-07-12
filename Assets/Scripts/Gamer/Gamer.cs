@@ -37,6 +37,8 @@ public class Gamer : MonoBehaviour
         int random = Random.Range(0, colors.Length);
 
         spriteRenderer.material.SetColor("_EmissionColor", colors[random]);
+
+        // transform.position = new Vector3(transform.position.x, transform.position.y, 2);
     }
 
     // Update is called once per frame
