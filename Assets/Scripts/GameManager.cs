@@ -33,8 +33,10 @@ public class GameManager : MonoBehaviour
         customerSatisfactionSlider.value = (float) GlobalSettings.Instance.maxCustomerSatisfaction / (float) customerSatisfaction.value;
     }
 
-    public void AddScore(int s) {
-        score.ApplyChange(s);
+    public void AddScore(int add) {
+        add = add * customerSatisfaction.value;
+
+        score.ApplyChange(add);
         scoreText.text = "" + score.value;
     }
 

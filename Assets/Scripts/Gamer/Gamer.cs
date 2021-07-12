@@ -6,6 +6,11 @@ public class Gamer : MonoBehaviour
 {
     public float speed = 1f;
     public float stopDistance = 0.1f;
+    public int requiredPlaySeconds = 10;
+    public int angrySeconds = 5;
+    public GameObject happyEmotion;
+    public GameObject angryEmotion;
+    private float currentAngry = 0;
     private ArcadeMachine targetMachine;
     private int currentStep = 0;
     private IsometricCharacterAnimation isoAnimation;
@@ -47,7 +52,7 @@ public class Gamer : MonoBehaviour
                 stage = GamerScenarioStage.Playing;
                 targetMachine.OnGamerStartPlaying();
                 
-                StartCoroutine(PlayerPlayOnMachineCoroutine(5));
+                StartCoroutine(PlayerPlayOnMachineCoroutine());
                 return;
             }
 
@@ -107,15 +112,32 @@ public class Gamer : MonoBehaviour
         targetMachine.OnGamerTarget();
     }
 
-    IEnumerator PlayerPlayOnMachineCoroutine(int playTime)
+    IEnumerator PlayerPlayOnMachineCoroutine()
     {
-        for (int i = 0; i < playTime * 2; i++) {
-            if (!targetMachine.isWorking) {
-                this.happy = false;
-                break;
+        float currentPlayTime = 0;
+        for (;;) {
+            if (targetMachine.isWorking) {
+                currentPlayTime += 0.5f;
+
+                if ((int) currentPlayTime >= requiredPlaySeconds) {
+                    this.happy = true;
+                    break;
+                }
+            } else {
+                currentAngry += 0.5f;
+                if ((int) currentAngry >= angrySeconds) {
+                    this.happy = false;
+                    break;
+                }
             }
 
             yield return new WaitForSeconds(0.5f);
+        }
+
+        if (this.happy) {
+            happyEmotion.SetActive(true);
+        } else {
+            angryEmotion.SetActive(true);
         }
 
         currentStep--;

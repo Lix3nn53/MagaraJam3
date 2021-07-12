@@ -8,13 +8,13 @@ public class LightRotator : MonoBehaviour
     public float min;
     public float max;
     public float speed = 10f;
-    private Light2D light;
+    private Light2D light2D;
     private bool increase = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        light = GetComponent<Light2D>();
+        light2D = GetComponent<Light2D>();
     }
 
     // Update is called once per frame

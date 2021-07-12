@@ -38,6 +38,7 @@ public class ArcadeMachine : Interractable
         return isEmpty && isWorking;
     }
 
+    // TODO add error type
     public void setWorking(bool working) {
         isWorking = working;
         if (isWorking) {
@@ -46,6 +47,7 @@ public class ArcadeMachine : Interractable
         } else {
             light2D.intensity = 0f;
             rendererArcade.material.SetColor("_EmissionColor", new Color());
+            AudioManager.Instance.Play("MachineShowdownElectric");
         }
     }
 
@@ -96,5 +98,6 @@ public class ArcadeMachine : Interractable
     }
     public override void OnInterract() {
         setWorking(true);
+        AudioManager.Instance.Play("MachineStart");
     }
 }
