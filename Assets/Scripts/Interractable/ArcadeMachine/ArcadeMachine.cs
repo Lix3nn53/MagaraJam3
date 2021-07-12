@@ -121,7 +121,11 @@ public class ArcadeMachine : Interractable
         }
     }
     public override void OnInterract() {
-        setWorking(true, FaultType.Electric);
-        AudioManager.Instance.Play("MachineStart");
+        // if (Player.Instance.GetCurrentTool() == null) return;
+        
+        if (Player.Instance.GetCurrentTool() == faultType) {
+            setWorking(true, FaultType.Electric);
+            AudioManager.Instance.Play("MachineStart");
+        }
     }
 }
