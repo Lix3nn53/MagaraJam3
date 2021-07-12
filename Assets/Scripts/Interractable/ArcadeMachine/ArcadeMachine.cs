@@ -10,7 +10,6 @@ public class ArcadeMachine : Interractable
 
     public bool isEmpty = true;
     public bool isWorking = true;
-    public float errorChance = 0.1f;
     public GameObject faultElectricIcon;
     public GameObject faultDiskIcon;
     private Renderer rendererArcade;
@@ -85,7 +84,7 @@ public class ArcadeMachine : Interractable
         for (;;) {
             float errorRandom = Random.Range(0.0f, 1.0f);
 
-            if (errorRandom < errorChance) {
+            if (errorRandom < GlobalSettings.Instance.machineErrorChance) {
                 int faultRandom = Random.Range(0, 2);
                 if (faultRandom == 0) {
                     setWorking(false, FaultType.Electric);

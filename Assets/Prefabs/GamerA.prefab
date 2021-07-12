@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1165039163
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 8384765133992846830, guid: 1712298d2155f6f4aaeb048ea85a1b0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -150,8 +150,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1165039163
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 7071851643102575423, guid: 1712298d2155f6f4aaeb048ea85a1b0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 6362941366302807752}
   - component: {fileID: 6362941366302807751}
   m_Layer: 0
-  m_Name: Gamer
+  m_Name: GamerA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,8 +362,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   stopDistance: 0.1
-  playSeconds: 10
-  angrySeconds: 5
+  requiredPlaySeconds: 10
+  angrySeconds: 8
   happyEmotion: {fileID: 853447513}
   angryEmotion: {fileID: 4909679408236895142}
 --- !u!1 &6362941366371148274
