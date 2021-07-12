@@ -199,7 +199,7 @@ MonoBehaviour:
   speed: 2
   stopDistance: 0.1
   requiredPlaySeconds: 10
-  angrySeconds: 8
+  angrySeconds: 7
   happyEmotion: {fileID: 5911642263749538326}
   angryEmotion: {fileID: 1596790198227057385}
 --- !u!1 &740818107254456509

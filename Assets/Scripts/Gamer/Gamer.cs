@@ -75,8 +75,11 @@ public class Gamer : MonoBehaviour
             isoAnimation.SetDirection(move - new Vector2(transform.position.x, transform.position.y));
             transform.position = new Vector3(move.x, move.y, transform.position.z);
         } else if (stage == GamerScenarioStage.Exit) {
-            if (currentStep == -2) {
+            if (currentStep == -3) {
+                return;
+            } else if (currentStep == -2) {
                 OnExitDoor();
+                currentStep = -3;
                 return;
             }
 
@@ -151,9 +154,20 @@ public class Gamer : MonoBehaviour
         if (happy) {
             GameManager.Instance.AddScore(1);
             GameManager.Instance.AddCustomerSatisfaction(+1);
+            AudioManager.Instance.Play("CustomerHappy");
         } else {
             GameManager.Instance.AddCustomerSatisfaction(-1);
+            AudioManager.Instance.Play("CustomerSad");
         }
+
+        StartCoroutine(DestroyWithDelay());
+    }
+
+    // Play effect while player is playing on this machine
+    IEnumerator DestroyWithDelay()
+    {
+        yield return new WaitForSeconds(1f);
+
         Destroy(gameObject);
     }
 }

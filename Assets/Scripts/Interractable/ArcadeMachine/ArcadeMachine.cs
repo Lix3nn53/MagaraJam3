@@ -58,13 +58,14 @@ public class ArcadeMachine : Interractable
         } else {
             light2D.intensity = 0f;
             rendererArcade.material.SetColor("_EmissionColor", new Color());
-            AudioManager.Instance.Play("MachineShowdownElectric");
             this.faultType = faultType;
 
             if (faultType == FaultType.Electric) {
                 faultElectricIcon.SetActive(true);
+                AudioManager.Instance.Play("MachineShowdownElectric");
             } else if (faultType == FaultType.Disk) {
                 faultDiskIcon.SetActive(true);
+                AudioManager.Instance.Play("MachineShowdownDisk");
             }
         }
     }

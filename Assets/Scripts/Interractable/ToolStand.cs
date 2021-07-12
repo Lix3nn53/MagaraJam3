@@ -8,5 +8,6 @@ public class ToolStand : Interractable
     public ArcadeMachine.FaultType faultType;
     public override void OnInterract() {
         Player.Instance.SetCurrentTool(faultType);
+        AudioManager.Instance.Play("ItemGrab");
     }
 }
