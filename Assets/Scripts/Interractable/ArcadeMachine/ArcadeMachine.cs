@@ -6,7 +6,7 @@ using UnityEngine;
 public class ArcadeMachine : Interractable
 {
     public Transform[] steps;
-    private Color startEmissionColor;
+    public Color startEmissionColor;
 
     public bool isEmpty = true;
     public bool isWorking = true;
@@ -26,7 +26,7 @@ public class ArcadeMachine : Interractable
     void Start()
     {
        rendererArcade = GetComponentInChildren<Renderer>();
-       startEmissionColor = rendererArcade.material.GetColor("_EmissionColor");
+       rendererArcade.material.SetColor("_EmissionColor", startEmissionColor);
        light2D = GetComponentInChildren<Light2D>();
     }
 

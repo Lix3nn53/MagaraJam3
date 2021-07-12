@@ -9550,6 +9550,7 @@ MonoBehaviour:
   keyGuide: {fileID: 838293416}
   steps:
   - {fileID: 2111429484}
+  startEmissionColor: {r: 0, g: 0.47058824, b: 0, a: 1}
   isEmpty: 1
   isWorking: 1
   faultElectricIcon: {fileID: 236557756}
@@ -9745,6 +9746,7 @@ MonoBehaviour:
   keyGuide: {fileID: 377454720}
   steps:
   - {fileID: 1813418319}
+  startEmissionColor: {r: 0.39215687, g: 0, b: 0.47058824, a: 0}
   isEmpty: 1
   isWorking: 1
   faultElectricIcon: {fileID: 1540148976}
@@ -12445,6 +12447,7 @@ MonoBehaviour:
   keyGuide: {fileID: 1342282912}
   steps:
   - {fileID: 1827262943}
+  startEmissionColor: {r: 0.39215687, g: 0, b: 0.47058824, a: 1}
   isEmpty: 1
   isWorking: 1
   faultElectricIcon: {fileID: 1900039367}
@@ -20725,6 +20728,7 @@ MonoBehaviour:
   steps:
   - {fileID: 427948125}
   - {fileID: 613388398}
+  startEmissionColor: {r: 0, g: 0.47058824, b: 0, a: 1}
   isEmpty: 1
   isWorking: 1
   faultElectricIcon: {fileID: 1386147443}
@@ -21117,6 +21121,7 @@ MonoBehaviour:
   steps:
   - {fileID: 1712384391}
   - {fileID: 454188801}
+  startEmissionColor: {r: 0, g: 0.4117647, b: 0.47058824, a: 1}
   isEmpty: 1
   isWorking: 1
   faultElectricIcon: {fileID: 92312094}
@@ -22825,6 +22830,7 @@ MonoBehaviour:
   keyGuide: {fileID: 1864287645}
   steps:
   - {fileID: 1356353642}
+  startEmissionColor: {r: 0, g: 0.4117647, b: 0.47058824, a: 1}
   isEmpty: 1
   isWorking: 1
   faultElectricIcon: {fileID: 1971311324}
